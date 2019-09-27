@@ -8,44 +8,40 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     
-    var imagePicker = UIImagePickerController()
-    var image: UIImage? = nil
+    let imagePicker = UIImagePickerController()
+    var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if checkImageView(imageView: self.imageView) == false {
-            self.nextButton.isEnabled = false
-            self.nextButton.isHidden = true
-        } else {
-            self.nextButton.isEnabled = true
-            self.nextButton.isHidden = false
-        }
+        let hasImage = isImageAvailable(imageView: imageView)
+        nextButton.isEnabled = hasImage
+        nextButton.isHidden = !hasImage
 
         imagePicker.delegate = self
-       
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextController = segue.destination as? ViewControllerFilters
+        nextController?.image = self.imageView.image
     }
 
     @IBAction func pickImage(_ sender: Any) {
-    
-            imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = true
 
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true, completion: nil)
-        
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func nextButton(_ sender: Any) {
-        
-       
+        // TODO: Implement method
     }
     
-    func checkImageView(imageView: UIImageView) -> Bool {
+    func isImageAvailable(imageView: UIImageView) -> Bool {
         if imageView.image == nil {
             print("isnt available")
             return false
@@ -55,29 +51,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             return true
         }
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+}
+
+// MARK: - UIImagePickerControllerDelegate implementation
+
+extension ViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         imageView.image = image
-        
-        self.imagePicker.dismiss(animated: true, completion: nil)
-        
-        
-        if checkImageView(imageView: self.imageView) == false {
-            self.nextButton.isEnabled = false
-            self.nextButton.isHidden = true
-        } else {
-            self.nextButton.isEnabled = true
-            self.nextButton.isHidden = false
-        }
+
+        imagePicker.dismiss(animated: true, completion: nil)
+
+        let hasImage = isImageAvailable(imageView: imageView)
+        nextButton.isEnabled = hasImage
+        nextButton.isHidden = !hasImage
     }
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextController = segue.destination as? ViewControllerFilters
-        nextController?.image = self.imageView.image
-    }
 }
 
+// MARK: - UINavigationControllerDelegate implementation
+
+extension ViewController: UINavigationControllerDelegate { }
