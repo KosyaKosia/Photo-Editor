@@ -9,18 +9,13 @@
 import UIKit
 
 class ViewControllerFilters2: UIViewController {
-
     @IBOutlet weak var imageView: UIImageView!
-    var filteredImage: UIImage? = nil
+    var filteredImage: UIImage?
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.imageView.image = filteredImage!
-        // Do any additional setup after loading the view.
+        imageView.image = filteredImage!
     }
-    
-    
 }
