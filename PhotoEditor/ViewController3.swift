@@ -1,47 +1,66 @@
-//
-//  ViewController3.swift
-//  PhotoEditor
-//
-//  Created by Дарья Косякова on 9/20/19.
-//  Copyright © 2019 Дарья Косякова. All rights reserved.
-//
-
 import UIKit
 
-class ViewController3: UIViewController {
+class ViewController3: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
     @IBOutlet weak var imageView: UIImageView!
-    let imagePicker = UIImagePickerController()
+    @IBOutlet weak var nextButton: UIButton!
+    var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
+        self.imagePicker.delegate = self
+        
+        let hasImage = isImageAvailable(imageView: imageView)
+        nextButton.isEnabled = hasImage
+        nextButton.isHidden = !hasImage
+
+        // Do any additional setup after loading the view.
     }
-   
+    
+    @IBAction func nextButton(_ sender: Any) {
+    }
+    
     @IBAction func takePhoto(_ sender: Any) {
+        
+        imagePicker.allowsEditing = true
+        
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-            present(imagePicker, animated: true, completion: nil)}
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)}
         else {
-            print("Camera isn't available")
+            print("Camera isnt available")
         }
     }
-}
-
-// MARK: - UIImagePickerControllerDelegate implementation
-
-extension ViewController3: UIImagePickerControllerDelegate {
+    
+    func isImageAvailable(imageView: UIImageView) -> Bool {
+        if imageView.image == nil {
+            print("isnt available")
+            return false
+        } else {
+            print("is available")
+            
+            return true
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextController = segue.destination as? ViewControllerFilters
+        nextController?.image = self.imageView.image
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         imageView.image = image
-
-        imagePicker.dismiss(animated: true, completion: nil)
+        
+        self.imagePicker.dismiss(animated: true, completion: nil)
+        
+        let hasImage = isImageAvailable(imageView: imageView)
+               nextButton.isEnabled = hasImage
+               nextButton.isHidden = !hasImage
     }
-
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }
+    
 }
 
-// MARK: - UINavigationControllerDelegate implementation
-
-extension ViewController3: UINavigationControllerDelegate { }
