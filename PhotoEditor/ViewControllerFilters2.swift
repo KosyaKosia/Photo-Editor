@@ -23,36 +23,25 @@ class ViewControllerFilters2: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let image = imageView.image!
-        
-        PHPhotoLibrary.requestAuthorization({ status in
-            guard status == .authorized else {
-                return
-            }
-            PHPhotoLibrary.shared().performChanges({
-                let changeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
-                let objectPlaceholder = changeRequest.placeholderForCreatedAsset
-                let albumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: "Test")
-                let enumeration: NSArray = [objectPlaceholder!]
-                albumRequest.addAssets(enumeration)
-            }, completionHandler: { isSaved, error in
-                if let error = error {
-                    NSLog("🛑 An error appeared while saving photo: " + error.localizedDescription)
-                    return
-                }
-                if isSaved {
-                    NSLog("✅ Successfully saved photo to library.")
-                } else {
-                    NSLog("wrong")
-                }
-                
-            })
-        })
-        
-//        UIImageWriteToSavedPhotosAlbum(
-//            imageView.image!,
-//            self,
-//            #selector(image(_:didFinishSavingWithError:contextInfo:)), nil
-//        )
+
+        saveImage(image)
+    }
+
+    private func saveImage(_ image: UIImage) {
+        guard let imageData = image.pngData() else {
+            NSLog("🛑 Failed to make data from image")
+            return
+        }
+        guard let compressedImage = UIImage(data: imageData) else {
+            NSLog("🛑 Failed to make image from data")
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(
+            compressedImage,
+            self,
+            #selector(image(_:didFinishSavingWithError:contextInfo:)),
+            nil
+        )
     }
     
     @objc private func image(_ image: UIImage,
