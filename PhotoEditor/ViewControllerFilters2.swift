@@ -8,12 +8,19 @@
 
 import UIKit
 import Photos
+import GPUImage
 
-class ViewControllerFilters2: UIViewController {
+class ViewControllerFilters2: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
     @IBOutlet weak var imageView: UIImageView!
     var filteredImage: UIImage?
     @IBOutlet weak var scrollView: UIScrollView!
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    let indentifire = "My cell"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,12 +28,73 @@ class ViewControllerFilters2: UIViewController {
             imageView.image = filter
         }
         
+        createTable()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "✔", style: .plain, target: self, action: #selector(doneButtonDidPress))
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
+    
+    // MARK: - createTable
+    func createTable() {
+           tableView.register(UITableViewCell.self, forCellReuseIdentifier: indentifire)
+           
+           self.tableView.delegate = self
+           self.tableView.dataSource = self
+           
+       }
+    
+    
+     // MARK: - UITableViewDataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 10
+        default:
+            break
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: indentifire, for: indexPath)
+        //cell.textLabel?.text = "section = \(indexPath.section) cell = \(indexPath.row)"
+        
+        let image = "11.jpg"
+        let image1 = UIImage(named: image)
+    
+        
+        let imageView = UIImageView(frame: CGRect(x: 10, y: 6, width: 88, height: 88))
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.cornerRadius = 44;// Corner radius should be half of the height and width.
+        imageView.image = image1
+        cell.addSubview(imageView)
+        
+        return cell
+        
+    }
+    
+    
+    //MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
+    
+    
+    
+    //MARK: - Work with saving image
     
     @objc private func doneButtonDidPress() {
         guard let image = imageView.image else {
@@ -36,6 +104,7 @@ class ViewControllerFilters2: UIViewController {
         saveImage(image)
     }
 
+    
     private func saveImage(_ image: UIImage) {
         var savingImage = image
         if savingImage.cgImage == nil {
@@ -78,4 +147,6 @@ class ViewControllerFilters2: UIViewController {
         
     }
 }
+
+
 

@@ -24,6 +24,7 @@ class ViewController2: UIViewController {
 
     @IBAction func selectFromLibruary(_ sender: Any) {
         // TODO:
+        
     }
 
     @IBAction func takePhoto(_ sender: Any) {
