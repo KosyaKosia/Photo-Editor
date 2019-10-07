@@ -4,6 +4,8 @@ class ViewController3: UIViewController, UIImagePickerControllerDelegate, UINavi
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var takePhoto: UIButton!
+    
     var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -13,6 +15,9 @@ class ViewController3: UIViewController, UIImagePickerControllerDelegate, UINavi
         let hasImage = isImageAvailable(imageView: imageView)
         nextButton.isEnabled = hasImage
         nextButton.isHidden = !hasImage
+        
+        nextButton.layer.cornerRadius = 15
+        takePhoto.layer.cornerRadius = 15
 
         // Do any additional setup after loading the view.
     }

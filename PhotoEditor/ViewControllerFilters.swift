@@ -42,9 +42,17 @@ class ViewControllerFilters: UIViewController {
         slider3.addTarget(self, action: #selector(sliderValueDidChange(sender:)), for: .valueChanged)
         slider4.addTarget(self, action: #selector(sliderValueDidChange(sender:)), for: .valueChanged)
 
+         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "✔", style: .plain, target: self, action: #selector(addTapped))
+        
         updateImage()
     }
     
+    @objc func addTapped() {
+
+        let filterTwoController = self.storyboard?.instantiateViewController(withIdentifier: "filter2") as! ViewControllerFilters2
+        filterTwoController.filteredImage = imageView.image!
+        self.navigationController?.pushViewController(filterTwoController, animated: true)
+    }
     
     @objc func sliderValueDidChange(sender: UISlider!) {
         switch sender.tag {

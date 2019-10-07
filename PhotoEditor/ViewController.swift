@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var pickImage: UIButton!
+    
     let imagePicker = UIImagePickerController()
     var image: UIImage?
     
@@ -21,7 +23,10 @@ class ViewController: UIViewController {
         let hasImage = isImageAvailable(imageView: imageView)
         nextButton.isEnabled = hasImage
         nextButton.isHidden = !hasImage
-
+        
+        nextButton.layer.cornerRadius = 15
+        pickImage.layer.cornerRadius = 15
+      
         imagePicker.delegate = self
     }
 

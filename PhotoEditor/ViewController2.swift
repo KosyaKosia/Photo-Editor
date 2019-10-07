@@ -9,7 +9,15 @@
 import UIKit
 
 class ViewController2: UIViewController {
+    
+    @IBOutlet weak var fromLibrary: UIButton!
+    @IBOutlet weak var takePhoto: UIButton!
+    
     override func viewDidLoad() {
+        
+        fromLibrary.layer.cornerRadius = 23
+        takePhoto.layer.cornerRadius = 23
+        
         super.viewDidLoad()
     }
 
