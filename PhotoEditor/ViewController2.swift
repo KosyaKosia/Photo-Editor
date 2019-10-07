@@ -17,6 +17,7 @@ class ViewController2: UIViewController {
         
         fromLibrary.layer.cornerRadius = 23
         takePhoto.layer.cornerRadius = 23
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "11.jpg")!)
         
         super.viewDidLoad()
     }

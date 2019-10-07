@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		DD78C0AA4A89286AC85ACC95 /* Pods_PhotoEditor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 139F9EB7F3DC318C9ABCBC71 /* Pods_PhotoEditor.framework */; };
+		E02DE40F234B2CC10094945A /* 11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E02DE40E234B2CC10094945A /* 11.jpg */; };
 		E04D3C972334BF4200F2BF55 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D3C962334BF4200F2BF55 /* ViewController2.swift */; };
 		E04D3C992334C18400F2BF55 /* ViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D3C982334C18400F2BF55 /* ViewController3.swift */; };
 		E04D3C9B2335319100F2BF55 /* ViewControllerFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04D3C9A2335319100F2BF55 /* ViewControllerFilters.swift */; };
@@ -23,6 +24,7 @@
 		139F9EB7F3DC318C9ABCBC71 /* Pods_PhotoEditor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoEditor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D013941EEB80382D1EF245 /* Pods-PhotoEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoEditor.debug.xcconfig"; path = "Target Support Files/Pods-PhotoEditor/Pods-PhotoEditor.debug.xcconfig"; sourceTree = "<group>"; };
 		C138B372BF5B753FF4C4E301 /* Pods-PhotoEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoEditor.release.xcconfig"; path = "Target Support Files/Pods-PhotoEditor/Pods-PhotoEditor.release.xcconfig"; sourceTree = "<group>"; };
+		E02DE40E234B2CC10094945A /* 11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpg; sourceTree = "<group>"; };
 		E04D3C962334BF4200F2BF55 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		E04D3C982334C18400F2BF55 /* ViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController3.swift; sourceTree = "<group>"; };
 		E04D3C9A2335319100F2BF55 /* ViewControllerFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFilters.swift; sourceTree = "<group>"; };
@@ -62,7 +64,6 @@
 				22D013941EEB80382D1EF245 /* Pods-PhotoEditor.debug.xcconfig */,
 				C138B372BF5B753FF4C4E301 /* Pods-PhotoEditor.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -87,6 +88,7 @@
 		E0F49C2723340CC600CF3ED3 /* PhotoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				E02DE40E234B2CC10094945A /* 11.jpg */,
 				E0F49C2823340CC600CF3ED3 /* AppDelegate.swift */,
 				E0F49C2A23340CC600CF3ED3 /* ViewController.swift */,
 				E04D3C962334BF4200F2BF55 /* ViewController2.swift */,
@@ -164,6 +166,7 @@
 				E0F49C3323340CC900CF3ED3 /* LaunchScreen.storyboard in Resources */,
 				E0F49C3023340CC900CF3ED3 /* Assets.xcassets in Resources */,
 				E0F49C2E23340CC600CF3ED3 /* Main.storyboard in Resources */,
+				E02DE40F234B2CC10094945A /* 11.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
