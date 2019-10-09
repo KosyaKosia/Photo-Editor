@@ -20,10 +20,11 @@ class ViewControllerFilters: UIViewController {
 
     let context = CIContext()
 
-    @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var slider2: UISlider!
-    @IBOutlet weak var slider3: UISlider!
-    @IBOutlet weak var slider4: UISlider!
+    @IBOutlet weak var slider: CustomSlider!
+    @IBOutlet weak var slider2: CustomSlider!
+    @IBOutlet weak var slider3: CustomSlider!
+    @IBOutlet weak var slider4: CustomSlider!
+    
     
     let colorControlsFilter = CIFilter(name: "CIColorControls")!
     let sepiaFilter = CIFilter(name:"CISepiaTone")!
@@ -90,78 +91,6 @@ class ViewControllerFilters: UIViewController {
             self.imageView.image = UIImage(ciImage: self.sharp.outputImage!)
         }
     }
-    
-//    @objc func sliderValueDidChange(sender: UISlider!) {
-//
-//        switch sender.tag {
-//        case 0:
-//            let originalCIImage = CIImage(image: self.image!)
-//            let value = sender.value
-//            self.sepiaLabelValue.text = String(Int(value*100))
-//            if  let sepiaCIImage = sepiaFilter(originalCIImage!, intensity: Double(value)) {
-//                filteredImage = sepiaCIImage
-//                self.imageView.image = UIImage(ciImage: sepiaCIImage)
-//            }
-//        case 1:
-//            let originalCIImage = CIImage(image: self.image!)
-//            let value = sender.value
-//            self.brightnessValue.text = String(Int(value*100))
-//            if let brightnessCIImage = brightnessFilter(originalCIImage!, intensity: Double(value)) {
-//                filteredImage = brightnessCIImage
-//                self.imageView.image = UIImage(ciImage:brightnessCIImage)
-//            }
-//        case 2:
-//            let originalCIImage = CIImage(image: self.image!)
-//            let value = sender.value
-//            self.contrastLabel.text = String(Int(value*100))
-//            if let contrastCIImage = contrastFilter(originalCIImage!, intensity: Double(value)){
-//                filteredImage = contrastCIImage
-//                self.imageView.image = UIImage(ciImage:contrastCIImage)
-//            }
-//
-//        case 3:
-//            let originalCIImage = CIImage(image: self.image!)
-//            let value = sender.value
-//            self.saturationValue.text = String(Int(value*100))
-//            if let saturationCIImage = saturationFilter(originalCIImage!, intensity: Double(value)) {
-//                filteredImage = saturationCIImage
-//                self.imageView.image = UIImage(ciImage:saturationCIImage)
-//            }
-//
-//        default:
-//            print("No such tags")
-//        }
-
-
-    
-//    func sepiaFilter(_ input: CIImage, intensity: Double) -> CIImage?
-//    {
-//        let sepiaFilter = CIFilter(name:"CISepiaTone")
-//        sepiaFilter?.setValue(input, forKey: kCIInputImageKey)
-//        sepiaFilter?.setValue(intensity, forKey: kCIInputIntensityKey)
-//        return sepiaFilter?.outputImage
-//    }
-//
-//    func brightnessFilter(_ input: CIImage, intensity: Double) -> CIImage? {
-//        let brightnessFilter = CIFilter(name: "CIColorControls")
-//        brightnessFilter?.setValue(input, forKey: kCIInputImageKey)
-//        brightnessFilter?.setValue(intensity, forKey: kCIInputBrightnessKey)
-//        return brightnessFilter?.outputImage
-//    }
-//
-//    func contrastFilter(_ input: CIImage, intensity: Double) -> CIImage? {
-//        let contrastFilter = CIFilter(name: "CIColorControls")
-//        contrastFilter?.setValue(input, forKey: kCIInputImageKey)
-//        contrastFilter?.setValue(intensity, forKey: kCIInputContrastKey)
-//        return contrastFilter?.outputImage
-//    }
-//
-//    func saturationFilter(_ input: CIImage, intensity: Double) -> CIImage? {
-//        let saturationFilter = CIFilter(name: "CIColorControls")
-//        saturationFilter?.setValue(input, forKey: kCIInputImageKey)
-//        saturationFilter?.setValue(intensity, forKey: kCIInputSaturationKey)
-//        return saturationFilter?.outputImage
-//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextController = segue.destination as? ViewControllerFilters2
@@ -169,4 +98,53 @@ class ViewControllerFilters: UIViewController {
     }
 }
 
+class CustomSlider: UISlider {
 
+     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        var bounds: CGRect = self.bounds
+        bounds = bounds.insetBy(dx: -40, dy: -40)
+        return bounds.contains(point)
+     }
+}
+
+//class CustomSlider: UISlider {
+//
+///*
+//// Only override draw() if you perform custom drawing.
+//// An empty implementation adversely affects performance during animation.
+//override func draw(_ rect: CGRect) {
+//   //Drawing code
+//}
+//*/
+//// Increase slider height
+//   override func trackRect(forBounds bounds: CGRect) -> CGRect {
+//    let customBounds: CGRect = CGRect(origin: bounds.origin, size: CGSize(width: bounds.size.width, height: 5.0))
+//    return customBounds
+//}
+//
+//
+//
+//override func thumbRect(forBounds bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
+//    return super.thumbRect(
+//        forBounds: bounds, trackRect: rect, value: value)
+//
+//
+//}
+//
+//// Increase Thumb hot spot clickable area
+//override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+//    var bounds: CGRect = self.bounds
+//    bounds = bounds.insetBy(dx: -10, dy: -10);
+//    return bounds.contains(point);
+//
+//}
+//
+//override func awakeFromNib() {
+//   //Configure Volume slider
+//    let thumbImageNormal = UIImage.init(named:"thumb")
+//    self.setThumbImage(thumbImageNormal, for: .normal)
+//
+//    super.awakeFromNib()
+//}
+
+//}

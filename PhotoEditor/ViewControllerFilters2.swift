@@ -20,6 +20,8 @@ class ViewControllerFilters2: UIViewController, UITableViewDelegate, UITableView
     
     let indentifire = "My cell"
     
+    let filtersArray = ["filter1", "filter2", "filter3", "filter4", "filter5"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,34 +50,34 @@ class ViewControllerFilters2: UIViewController, UITableViewDelegate, UITableView
     
     
      // MARK: - UITableViewDataSource
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 10
-        default:
-            break
-        }
-        return 0
+        return filtersArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: indentifire, for: indexPath)
-        //cell.textLabel?.text = "section = \(indexPath.section) cell = \(indexPath.row)"
+        //let textArray = filtersArray[indexPath.row]
+       
+        let text = filtersArray[indexPath.row]
+        cell.textLabel?.text = text
+        cell.textLabel?.textAlignment = .center
         
-        let image = "11.jpg"
-        let image1 = UIImage(named: image)
-    
+        
+        var savingImage = imageView.image
+        
+        if savingImage?.cgImage == nil {
+            let ciImage = imageView.image?.ciImage
+            let cgImage = CIContext(options: nil).createCGImage(ciImage!, from: ciImage!.extent)
+            savingImage = UIImage(cgImage: cgImage!)
+        }
         
         let imageView = UIImageView(frame: CGRect(x: 10, y: 6, width: 88, height: 88))
         imageView.layer.borderWidth = 1.0
         imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = 44;// Corner radius should be half of the height and width.
-        imageView.image = image1
+        imageView.image = savingImage
         cell.addSubview(imageView)
         
         return cell
@@ -89,7 +91,7 @@ class ViewControllerFilters2: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        print(indexPath.row + 1)
     }
     
     
@@ -147,6 +149,7 @@ class ViewControllerFilters2: UIViewController, UITableViewDelegate, UITableView
         
     }
 }
+
 
 
 
