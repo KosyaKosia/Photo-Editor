@@ -5,7 +5,8 @@ class ViewController3: UIViewController, UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var takePhoto: UIButton!
-    
+   //github.com в браузере поищи
+    //second	
     var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -37,6 +38,7 @@ class ViewController3: UIViewController, UIImagePickerControllerDelegate, UINavi
         }
     }
     
+    //MARK: - Check image is available or not
     func isImageAvailable(imageView: UIImageView) -> Bool {
         if imageView.image == nil {
             print("isnt available")
@@ -48,11 +50,14 @@ class ViewController3: UIViewController, UIImagePickerControllerDelegate, UINavi
         }
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextController = segue.destination as? ViewControllerFilters
         nextController?.image = self.imageView.image
     }
     
+    
+    //MARK: - ImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
         imageView.image = image
@@ -63,6 +68,8 @@ class ViewController3: UIViewController, UIImagePickerControllerDelegate, UINavi
                nextButton.isEnabled = hasImage
                nextButton.isHidden = !hasImage
     }
+    
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
     }

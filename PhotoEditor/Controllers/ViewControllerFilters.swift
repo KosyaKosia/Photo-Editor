@@ -48,12 +48,16 @@ class ViewControllerFilters: UIViewController {
         updateImage()
     }
     
+     //MARK: - addTapped - func for navbar
+    
     @objc func addTapped() {
+        
+        printAlert(title: "Next Screen", message: "Are you sure?", style: .alert)
 
-        let filterTwoController = self.storyboard?.instantiateViewController(withIdentifier: "filter2") as! ViewControllerFilters2
-        filterTwoController.filteredImage = imageView.image!
-        self.navigationController?.pushViewController(filterTwoController, animated: true)
+       
     }
+    
+    //MARK: - SliderValueDidChange
     
     @objc func sliderValueDidChange(sender: UISlider!) {
         switch sender.tag {
@@ -80,12 +84,13 @@ class ViewControllerFilters: UIViewController {
         updateImage()
     }
     
+     //MARK: - updateImage
     func updateImage() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {
                 return
             }
-            //                let originalCIImage = CIImage(image: self.image!)
+           
             self.colorControlsFilter.setValue(self.originalCIImage, forKey: kCIInputImageKey)
             self.sharp.setValue(self.colorControlsFilter.outputImage, forKey: kCIInputImageKey)
             self.imageView.image = UIImage(ciImage: self.sharp.outputImage!)
@@ -96,55 +101,34 @@ class ViewControllerFilters: UIViewController {
         let nextController = segue.destination as? ViewControllerFilters2
         nextController?.filteredImage = imageView.image!
     }
+    
+    func printAlert(title: String, message: String, style: UIAlertController.Style) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
+        let actions = UIAlertAction(title: "OK", style: .default) { (action) in
+
+            let filterTwoController = self.storyboard?.instantiateViewController(withIdentifier: "filter2") as! ViewControllerFilters2
+            filterTwoController.filteredImage = self.imageView.image!
+                   self.navigationController?.pushViewController(filterTwoController, animated: true)
+        }
+        
+        let action = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        
+        
+        alert.addAction(actions)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
+ //MARK: - CustomSlider
 class CustomSlider: UISlider {
 
      override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         var bounds: CGRect = self.bounds
-        bounds = bounds.insetBy(dx: -40, dy: -40)
+        bounds = bounds.insetBy(dx: -20, dy: -20)
         return bounds.contains(point)
      }
 }
 
-//class CustomSlider: UISlider {
-//
-///*
-//// Only override draw() if you perform custom drawing.
-//// An empty implementation adversely affects performance during animation.
-//override func draw(_ rect: CGRect) {
-//   //Drawing code
-//}
-//*/
-//// Increase slider height
-//   override func trackRect(forBounds bounds: CGRect) -> CGRect {
-//    let customBounds: CGRect = CGRect(origin: bounds.origin, size: CGSize(width: bounds.size.width, height: 5.0))
-//    return customBounds
-//}
-//
-//
-//
-//override func thumbRect(forBounds bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
-//    return super.thumbRect(
-//        forBounds: bounds, trackRect: rect, value: value)
-//
-//
-//}
-//
-//// Increase Thumb hot spot clickable area
-//override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-//    var bounds: CGRect = self.bounds
-//    bounds = bounds.insetBy(dx: -10, dy: -10);
-//    return bounds.contains(point);
-//
-//}
-//
-//override func awakeFromNib() {
-//   //Configure Volume slider
-//    let thumbImageNormal = UIImage.init(named:"thumb")
-//    self.setThumbImage(thumbImageNormal, for: .normal)
-//
-//    super.awakeFromNib()
-//}
-
-//}

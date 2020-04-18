@@ -26,14 +26,16 @@ class ViewController: UIViewController {
         
         nextButton.layer.cornerRadius = 15
         pickImage.layer.cornerRadius = 15
-      
+       
         imagePicker.delegate = self
     }
 
+     //MARK: - func preapre to next controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextController = segue.destination as? ViewControllerFilters
         nextController?.image = self.imageView.image
     }
+    
 
     @IBAction func pickImage(_ sender: Any) {
         imagePicker.allowsEditing = true
@@ -42,10 +44,14 @@ class ViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
+    
+    
     @IBAction func nextButton(_ sender: Any) {
         // TODO: Implement method
     }
     
+    
+     //MARK: - check image availabel or not
     func isImageAvailable(imageView: UIImageView) -> Bool {
         if imageView.image == nil {
             print("isnt available")

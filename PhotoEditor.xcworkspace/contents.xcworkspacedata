@@ -2,6 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:PhotoEditor/ViewControllerFirst.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/darakosakova/Desktop/PROJECTS/PhotoEditor/PhotoEditor/ViewControllerFirst.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/darakosakova/Desktop/PROJECTS/PhotoEditor/PhotoEditor/DeveloperViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:PhotoEditor.xcodeproj">
    </FileRef>
    <FileRef
